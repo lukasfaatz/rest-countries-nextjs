@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import axios from "axios";
 import Header from "../../components/Header";
 import { Country } from "../../models/Country";
 import { ArrowLeftIcon } from "@heroicons/react/outline";
+import Borders from "../../components/Borders";
 
 interface CountryPageProps {
 	country: Country;
+	countries: Country[];
 }
 
-function CountryPage({ country }: CountryPageProps) {
-	const [themeMode, setdarkMode] = useState("dark");
+function CountryPage({ country, countries }: CountryPageProps) {
 	const languages = Object.values(country.languages).map(
 		(language) => language
 	);
@@ -23,15 +24,10 @@ function CountryPage({ country }: CountryPageProps) {
 		(currency) => currency
 	);
 
-	const changeTheme = (mode: boolean) => {
-		mode ? setdarkMode("dark") : setdarkMode("");
-	};
-
 	return (
-		<div className={themeMode}>
-			<div className='dark:bg-gray-800 dark:text-white h-screen'>
-			<Header theme={(mode: boolean) => changeTheme(mode)} />
-			<div className='px-24'>
+		<div className='dark:bg-gray-800 dark:text-white min-h-screen'>
+			<Header />
+			<div className='px-12 md:px-24'>
 				<div className='py-16'>
 					<Link href='/'>
 						<div className='border-2 p-2 px-4  w-36 flex items-center shadow-md rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600'>
@@ -41,10 +37,10 @@ function CountryPage({ country }: CountryPageProps) {
 					</Link>
 				</div>
 				<div className='flex flex-col  md:flex-row gap-5'>
-					<div id='flag' className='w-full md:w-1/2 '>
+					<div id='flag' className='w-full md:w-1/2'>
 						<Image src={country.flags.svg} height={600} width={900}></Image>
 					</div>
-					<div id='information' className='w-full md:w-1/2 md:text-2xl  '>
+					<div id='information' className='w-full md:w-1/2 '>
 						<h1 className='text-4xl font-bold py-12'>{country.name.common}</h1>
 						<div className='flex flex-col  md:flex-row'>
 							<div className='w-full md:w-1/2 space-y-3'>
@@ -81,22 +77,9 @@ function CountryPage({ country }: CountryPageProps) {
 								</p>
 							</div>
 						</div>
-						<div className='flex items-center pt-24 '>
-							<div>
-								<p className='font-bold'>Border Countries:</p>
-							</div>
-							<div className=''>
-								{borders.map((border) => (
-									<span className='shadow-md rounded-lg  p-2 mx-4 text-center h-12  border-2'>
-										{border}
-									</span>
-								))}
-							</div>
-						</div>
+						<Borders borders={borders} countries={countries} />
 					</div>
 				</div>
-			</div>
-		
 			</div>
 		</div>
 	);
@@ -115,9 +98,14 @@ export async function getStaticProps({ params }: StaticCountryProps) {
 		`https://restcountries.com/v3.1/name/${params.id}`
 	);
 
+	const responseAll = await axios.get<Country[]>(
+		`https://restcountries.com/v3.1/all`
+	);
+
 	return {
 		props: {
 			country: response.data[0],
+			countries: responseAll.data,
 		},
 	};
 }

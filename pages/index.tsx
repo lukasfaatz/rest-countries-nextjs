@@ -42,7 +42,7 @@ const Home = ({ countries }: HomeProps) => {
 	return (
 		<>
 			<Header></Header>
-			<div id='container' className='bg-gray-100 dark:bg-gray-800 px-5 min-h-screen'>
+			<div id='container' className='bg-gray-100 dark:bg-gray-800 px-5 min-h-screen pb-10'>
 				<div id='top-bar' className='flex justify-between p-10 '>
 					<SearchBar search={search} filter={filterCountriesByText} />
 					<RegionBar regions={regions} filter={filterByRegion} />
