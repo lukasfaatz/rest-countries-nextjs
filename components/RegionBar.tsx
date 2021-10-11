@@ -2,7 +2,12 @@ import React from "react";
 import { useState } from "react";
 import { ArrowSmDownIcon, ArrowSmUpIcon } from "@heroicons/react/outline";
 
-function RegionBar({ regions, filter }) {
+interface RegionBarProps {
+	regions: string[];
+	filter: any;
+}
+
+function RegionBar({ regions, filter }: RegionBarProps) {
 	const [show, setShow] = useState(true);
 
 	const chooseRegion = (region: string) => {
@@ -34,13 +39,6 @@ function RegionBar({ regions, filter }) {
 					})}
 				</ul>
 			)}
-
-			{/* <label htmlFor='region-filter'>Filter by Region:</label>
-        <select className='appearance-none' name='region' id='region' onChange={(event) => filter(event)}>
-            {regions.map((region: string) => {
-                return <option value={region}>{region}</option>;
-            })}
-        </select> */}
 		</div>
 	);
 }
