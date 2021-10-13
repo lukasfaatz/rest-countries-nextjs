@@ -29,7 +29,7 @@ function RegionBar({ regions, filter }: RegionBarProps) {
 				<ul className='z-50 bg-white dark:bg-gray-700 dark:text-gray-50  p-2 flex flex-col'>
 					{regions.map((region: string) => {
 						return (
-							<li
+							<li key={region}
 								className='hover:bg-gray-100 dark:hover:bg-gray-600 h-8 text-center'
 								onClick={() => chooseRegion(region)}
 							>

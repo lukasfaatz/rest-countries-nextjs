@@ -1,6 +1,5 @@
 import { MoonIcon, SunIcon } from "@heroicons/react/outline";
 import React from "react";
-import { useState } from "react";
 import useDarkMode from "../hooks/UseDarkMode";
 
 function Header( ) {
