@@ -1,5 +1,5 @@
 import React from "react";
-import { Country } from "../models/Country";
+import { Country, Name } from "../models/Country";
 import Borders from "./Borders";
 
 interface CountryInformationProps {
@@ -9,38 +9,26 @@ interface CountryInformationProps {
 
 function CountryInformation({ country, countries }: CountryInformationProps) {
 	const languages = () => {
-		if (country.languages) {
-			return Object.values(country.languages).map(
-				(language) => language
-			);
-		}
-		return [""]
-	}
+		return country.languages
+			? Object.values(country.languages).map((language) => language)
+			: [""];
+	};
 
 	const borders = () => {
-		if (country.borders) {
-			return Object.values(country.borders).map((border) => border);
-		}	
-		return [""];
-	}
+		return country.borders
+			? Object.values(country.borders).map((border) => border)
+			: [""];
+	};
 
-	const nativeName = () => {
-		if (country.name.nativeName) { 
-			return Object.values(country.name.nativeName).map(
-				(native) => native.common
-			);
-		}	
-		return [""];
-	}
+	const [nativeName]: Name[] = country.name.nativeName
+		? Object.values(country.name.nativeName)
+		: [""];
 
 	const currencies = () => {
-		if (country.currencies) {
-			return Object.keys(country.currencies).map(
-				(currency) => currency
-			);
-		}
-		return [""];
-	}
+		return country.currencies
+			? Object.keys(country.currencies).map((currency) => currency)
+			: [""];
+	};
 
 	return (
 		<div id='information' className='w-full md:w-1/2 '>
@@ -49,7 +37,7 @@ function CountryInformation({ country, countries }: CountryInformationProps) {
 				<div className='w-full md:w-1/2 space-y-3'>
 					<div className='flex'>
 						<div className='font-bold pr-1'>Native Name:</div>
-						<div>{nativeName}</div>
+						<div>{nativeName.common}</div>
 					</div>{" "}
 					<div className='flex'>
 						<div className='font-bold pr-1'>Population:</div>
@@ -76,7 +64,7 @@ function CountryInformation({ country, countries }: CountryInformationProps) {
 						<b>Currencies:</b> {currencies().join(", ")}
 					</p>
 					<p>
-						<b>Langaguges:</b> {languages().join(", ")}
+						<b>Languages:</b> {languages().join(", ")}
 					</p>
 				</div>
 			</div>
