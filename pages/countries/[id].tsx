@@ -13,8 +13,6 @@ interface CountryPageProps {
 }
 
 function CountryPage({ country, countries }: CountryPageProps) {
-
-
 	return (
 		<div className='dark:bg-gray-800 dark:text-white min-h-screen'>
 			<Header />
@@ -41,12 +39,13 @@ export default CountryPage;
 interface StaticCountryProps {
 	params: {
 		id: string;
+		name: string;
 	};
 }
 
 export async function getStaticProps({ params }: StaticCountryProps) {
 	const response = await axios.get<Country[]>(
-		`https://restcountries.com/v3.1/name/${params.id}`
+		`https://restcountries.com/v3.1/alpha/${params.id}`
 	);
 	const [country] = response.data;
 
@@ -67,7 +66,7 @@ export async function getStaticPaths() {
 		`https://restcountries.com/v3.1/all`
 	);
 	const paths = response.data.map((country: Country) => {
-		return { params: { id: country.name.common } } as StaticCountryProps;
+		return { params: { id: country.cca3} } as StaticCountryProps;
 	});
 
 	return {

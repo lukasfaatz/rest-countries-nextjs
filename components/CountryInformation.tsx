@@ -8,16 +8,39 @@ interface CountryInformationProps {
 }
 
 function CountryInformation({ country, countries }: CountryInformationProps) {
-	const languages = Object.values(country.languages).map(
-		(language) => language
-	);
-	const borders = Object.values(country.borders).map((border) => border);
-	const [nativeName] = Object.values(country.name.nativeName).map(
-		(native) => native.common
-	);
-	const currencies = Object.keys(country.currencies).map(
-		(currency) => currency
-	);
+	const languages = () => {
+		if (country.languages) {
+			return Object.values(country.languages).map(
+				(language) => language
+			);
+		}
+		return [""]
+	}
+
+	const borders = () => {
+		if (country.borders) {
+			return Object.values(country.borders).map((border) => border);
+		}	
+		return [""];
+	}
+
+	const nativeName = () => {
+		if (country.name.nativeName) { 
+			return Object.values(country.name.nativeName).map(
+				(native) => native.common
+			);
+		}	
+		return [""];
+	}
+
+	const currencies = () => {
+		if (country.currencies) {
+			return Object.keys(country.currencies).map(
+				(currency) => currency
+			);
+		}
+		return [""];
+	}
 
 	return (
 		<div id='information' className='w-full md:w-1/2 '>
@@ -50,14 +73,14 @@ function CountryInformation({ country, countries }: CountryInformationProps) {
 						<b>Top Level Domain:</b> {country.tld}
 					</p>
 					<p>
-						<b>Currencies:</b> {currencies.join(", ")}
+						<b>Currencies:</b> {currencies().join(", ")}
 					</p>
 					<p>
-						<b>Langaguges:</b> {languages.join(", ")}
+						<b>Langaguges:</b> {languages().join(", ")}
 					</p>
 				</div>
 			</div>
-			<Borders borders={borders} countries={countries} />
+			<Borders borders={borders()} countries={countries} />
 		</div>
 	);
 }

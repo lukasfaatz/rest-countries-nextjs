@@ -9,7 +9,7 @@ interface CountryItemProps {
 
 function CountryItem({ country }: CountryItemProps) {
 	return (
-		<Link href='/countries/[id]' as={`/countries/${country.name.common}`}>
+		<Link href='/countries/[id]' as={`/countries/${country.cca3}`}>
 			<div className='group'>
 				<div
 					id='country'
