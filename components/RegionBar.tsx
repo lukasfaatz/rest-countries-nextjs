@@ -4,7 +4,7 @@ import { ArrowSmDownIcon, ArrowSmUpIcon } from "@heroicons/react/outline";
 
 interface RegionBarProps {
 	regions: string[];
-	filter: any;
+	filter(region: string): void;
 }
 
 function RegionBar({ regions, filter }: RegionBarProps) {

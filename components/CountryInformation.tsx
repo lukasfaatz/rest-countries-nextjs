@@ -6,14 +6,15 @@ interface CountryInformationProps {
 	country: Country;
 	countries: Country[];
 }
+
 function CountryInformation({ country, countries }: CountryInformationProps) {
 	const languages = Object.values(country.languages).map(
 		(language) => language
 	);
 	const borders = Object.values(country.borders).map((border) => border);
-	const nativeName = Object.values(country.name.nativeName).map(
+	const [nativeName] = Object.values(country.name.nativeName).map(
 		(native) => native.common
-	)[0];
+	);
 	const currencies = Object.keys(country.currencies).map(
 		(currency) => currency
 	);

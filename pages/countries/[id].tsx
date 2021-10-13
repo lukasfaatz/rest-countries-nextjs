@@ -1,11 +1,9 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import axios from "axios";
 import Header from "../../components/Header";
 import { Country } from "../../models/Country";
 import { ArrowLeftIcon } from "@heroicons/react/outline";
-import Borders from "../../components/Borders";
 import CountryInformation from "../../components/CountryInformation";
 import CountryFlag from "../../components/CountryFlag";
 
@@ -50,6 +48,7 @@ export async function getStaticProps({ params }: StaticCountryProps) {
 	const response = await axios.get<Country[]>(
 		`https://restcountries.com/v3.1/name/${params.id}`
 	);
+	const [country] = response.data;
 
 	const responseAll = await axios.get<Country[]>(
 		`https://restcountries.com/v3.1/all`
@@ -57,7 +56,7 @@ export async function getStaticProps({ params }: StaticCountryProps) {
 
 	return {
 		props: {
-			country: response.data[0],
+			country: country,
 			countries: responseAll.data,
 		},
 	};

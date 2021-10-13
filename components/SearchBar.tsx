@@ -1,7 +1,12 @@
 import React from 'react'
 import {SearchIcon} from '@heroicons/react/outline'
 
-function SearchBar( { search, filter}) {
+interface SearchBarProps {
+    search: string;
+    filter(event: React.ChangeEvent<HTMLInputElement>): void;
+}
+
+function SearchBar( { search, filter}: SearchBarProps) {
     return (
         <div id='search' className='flex relative  align-middle'>
             <SearchIcon 

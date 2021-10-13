@@ -24,12 +24,12 @@ function Borders({ borders, countries }: BordersProps) {
 			<div className='grid grid-cols-3 gap-4'>
 				{bordersLong.map((border) => (
                     <Link href='/countries/[id]' as={`/countries/${border}`}>
-					<span
+					<a
 						key={border}
 						className='shadow-md rounded-lg text-sm  p-2 text-center w-24 border-2 dark:hover:bg-gray-600 hover:bg-gray-50'
                         >
 						{border}
-					</span>
+					</a>
                         </Link>
 				))}
 			</div>

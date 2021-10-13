@@ -16,7 +16,7 @@ const Home = ({ countries }: HomeProps) => {
 
 	const [search, setSearch] = useState("");
 
-	const filterByRegion = (region: any) => {
+	const filterByRegion = (region: string) => {
 		setFilteredCountries(
 			countries.filter((country: Country) => country.region === region)
 		);
@@ -25,10 +25,12 @@ const Home = ({ countries }: HomeProps) => {
 		new Set(countries.map((country: Country) => country.region))
 	);
 
-	const filterCountriesByText = (event: any) => {
+	const filterCountriesByText = (
+		event: React.ChangeEvent<HTMLInputElement>
+	) => {
 		const searchText: string = event.target.value;
 		setSearch(event?.target.value);
-		if (searchText == "") {
+		if (searchText === "") {
 			setFilteredCountries(countries);
 		} else {
 			setFilteredCountries(
@@ -42,7 +44,10 @@ const Home = ({ countries }: HomeProps) => {
 	return (
 		<>
 			<Header></Header>
-			<div id='container' className='bg-gray-100 dark:bg-gray-800 px-5 min-h-screen pb-10'>
+			<div
+				id='container'
+				className='bg-gray-100 dark:bg-gray-800 px-5 min-h-screen pb-10'
+			>
 				<div id='top-bar' className='flex justify-between p-10 '>
 					<SearchBar search={search} filter={filterCountriesByText} />
 					<RegionBar regions={regions} filter={filterByRegion} />
