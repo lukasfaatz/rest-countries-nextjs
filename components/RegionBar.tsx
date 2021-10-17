@@ -15,7 +15,7 @@ function RegionBar({ regions, filter }: RegionBarProps) {
 		setShow(!show);
 	};
 	return (
-		<div id='filter' className=' bg-white dark:bg-gray-700 dark:text-gray-50 h-10 flex flex-col mt-5 md:mt-0 '>
+		<div id='filter' className=' bg-white rounded-lg dark:bg-gray-700 dark:text-gray-50 h-10 flex flex-col mt-5 md:mt-0 '>
 			<div className='relative '>
 				{show ? <ArrowSmDownIcon className='text-gray-500 dark:text-gray-50 h-10 w-8'></ArrowSmDownIcon> :
 					<ArrowSmUpIcon className='text-gray-500 dark:text-gray-50 h-10 w-8'></ArrowSmUpIcon> }
