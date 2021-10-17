@@ -15,12 +15,12 @@ function RegionBar({ regions, filter }: RegionBarProps) {
 		setShow(!show);
 	};
 	return (
-		<div id='filter' className='bg-white dark:bg-gray-700 dark:text-gray-50 h-10 flex flex-col '>
-			<div className='absolute'>
-				{show ? <ArrowSmDownIcon className='text-gray-500 dark:text-gray-50 h-8 w-8'></ArrowSmDownIcon> :
-					<ArrowSmUpIcon className='text-gray-500 dark:text-gray-50 h-8 w-8'></ArrowSmUpIcon> }
+		<div id='filter' className=' bg-white dark:bg-gray-700 dark:text-gray-50 h-10 flex flex-col mt-5 md:mt-0 '>
+			<div className='relative '>
+				{show ? <ArrowSmDownIcon className='text-gray-500 dark:text-gray-50 h-10 w-8'></ArrowSmDownIcon> :
+					<ArrowSmUpIcon className='text-gray-500 dark:text-gray-50 h-10 w-8'></ArrowSmUpIcon> }
 			</div>
-			<button className=' w-52 pt-2 z-50' onClick={() => setShow(!show)}>
+			<button className=' absolute  w-44 pt-2 z-50' onClick={() => setShow(!show)}>
 				Filter by Region:
 			</button>
 			{show ? (

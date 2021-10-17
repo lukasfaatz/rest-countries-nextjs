@@ -1,10 +1,11 @@
 import axios from "axios";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Country } from "../models/Country";
 import CountryList from "../components/CountryList";
 import SearchBar from "../components/SearchBar";
 import Header from "../components/Header";
 import RegionBar from "../components/RegionBar";
+import { SearchIcon } from "@heroicons/react/outline";
 
 interface HomeProps {
 	countries: Country[];
@@ -48,9 +49,13 @@ const Home = ({ countries }: HomeProps) => {
 				id='container'
 				className='bg-gray-100 dark:bg-gray-800 px-5 min-h-screen pb-10'
 			>
-				<div id='top-bar' className='flex justify-between p-10 '>
-					<SearchBar search={search} filter={filterCountriesByText} />
-					<RegionBar regions={regions} filter={filterByRegion} />
+				<div id='top-bar' className='md:flex md:justify-between  gap-5 py-10'>
+					<div className='w-full  md:w-72 h-12'>
+						<SearchBar search={search} filter={filterCountriesByText} />
+					</div>
+					<div className='w-full mt-2 md:mt-0 md:w-72  h-12'>
+						<RegionBar regions={regions} filter={filterByRegion} />
+					</div>
 				</div>
 				<CountryList countries={filteredCountries}></CountryList>
 			</div>
